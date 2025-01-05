@@ -3,10 +3,14 @@ from utlidade import carregar_dados
 
 st.title(r"1o Sem 2024 - Combustíveis Automotivos")
 
-base = carregar_dados()
+total_dados = carregar_dados()
 
-# st.title("Indicadores")
-# st.table(base)
+base = total_dados[total_dados["Produto"] == "GASOLINA"]
+base_gasolina = total_dados[total_dados["Produto"] == "GASOLINA"]
+base_disels10 = total_dados[total_dados["Produto"] == "DIESEL S10"]
+base_etanol = total_dados[total_dados["Produto"] == "ETANOL"]
+base_disel = total_dados[total_dados["Produto"] == "DIESEL"]
+base_gasolina_ad = total_dados[total_dados["Produto"] == "GASOLINA ADITIVADA"]
 
 
 def criar_card(icone, numero, texto, coluna_card):
@@ -19,8 +23,8 @@ def criar_card(icone, numero, texto, coluna_card):
     colum_2.write((texto))
 
 
-quant_dados = base["Regiao - Sigla"].count()
-base_ne = base[base["Regiao - Sigla"] == "NE"]
+quant_dados = base_gasolina["Regiao - Sigla"].count()
+base_ne = base_gasolina[base_gasolina["Regiao - Sigla"] == "NE"]
 quant_ne = base_ne["Regiao - Sigla"].count()
 
 cnpj_pi = base_ne[base_ne["Estado - Sigla"] == "PI"]
@@ -53,3 +57,6 @@ criar_card(icone=r"imagens\icones\Brasão_do_Maranhão.svg.png",
            numero=str(len(unico_ma)), texto="CNPJ Maranhão", coluna_card=colum_2)
 criar_card(icone=r"imagens\icones\caju.png",
            numero=str(len(unico_pi)), texto="CNPJ Piaui", coluna_card=colum_3)
+
+
+st.table(base_gasolina)
