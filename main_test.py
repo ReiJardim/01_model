@@ -34,13 +34,6 @@ def logout():
 dados_usuario = autenticar_usuario(authenticator)
 
 if dados_usuario:
-    @st.cache_data
-    def carregar_dados():
-        local_data = r"dados\ca-2024-01\Preços semestrais - AUTOMOTIVOS_2024.01.csv"
-        tabela = pd.read_csv(local_data, sep=';')
-        return tabela
-
-    base = carregar_dados()
 
     email_usuario = dados_usuario["username"]
     usuario = session.query(Usuario).filter_by(email=email_usuario).first()
@@ -49,14 +42,14 @@ if dados_usuario:
 
         pg = st.navigation(
             {
-                "Home page": [st.Page("abas/homepage.py", title="🏠 - Home Page")],
+                "Home page": [st.Page("homepage.py", title="🏠 - Home Page")],
                 "DashBoard": [
-                    st.Page("abas/dashboard.py", title="📊 - Dash"),
-                    st.Page("abas/indicadores.py", title="🚩 - Indicadores"),
+                    st.Page("dashboard.py", title="📊 - Dash"),
+                    st.Page("indicadores.py", title="🚩 - Indicadores"),
                 ],
                 "Conta": [
                     st.Page(logout, title="Sair"),
-                    st.Page("abas/criar_conta.py", title="Criar Conta"),
+                    st.Page("criar_conta.py", title="Criar Conta"),
                 ],
             }
         )
@@ -64,31 +57,14 @@ if dados_usuario:
     else:
         pg = st.navigation(
             {
-                "Home page": [st.Page("abas/homepage.py", title="🏠 - Home Page")],
+                "Home page": [st.Page("homepage.py", title="🏠 - Home Page")],
                 "DashBoard": [
-                    st.Page("abas/dashboard.py", title="📊 - Dash"),
-                    st.Page("abas/indicadores.py", title="🚩 - Indicadores"),
+                    st.Page("dashboard.py", title="📊 - Dash"),
+                    st.Page("indicadores.py", title="🚩 - Indicadores"),
                 ],
                 "Conta": [
                     st.Page(logout, title="Sair")
                 ],
             }
         )
-    pg.run()
-
-
-elif dados_usuario == False:
-    @st.cache_data
-    def carregar_dados():
-        local_data = r"dados\ca-2024-01\Preços semestrais - AUTOMOTIVOS_2024.01.csv"
-        tabela = pd.read_csv(local_data, sep=';')
-        return tabela
-
-    base = carregar_dados()
-
-    pg = st.navigation(
-        {
-            "Home page": [st.Page("abas/homepage.py", title="🏠 - Home Page")]
-        }
-    )
     pg.run()
