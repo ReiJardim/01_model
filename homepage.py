@@ -1,10 +1,23 @@
 import streamlit as st
 
+
+sesao_usuario = st.session_state
+
+nome = None
+if "username" in sesao_usuario:
+    nome = sesao_usuario.name
+
+else:
+    nome = ""
+
+
 colum1, colum2 = st.columns([0.4, 0.6])
 
-colum1.title("123 ")
-nome = "Mario"
-colum1.markdown(f"#### Olá, seja bem vindo(a), {nome} !")
+colum1.title(" ISC COMPANY ")
+
+if nome:
+    colum1.markdown(f"#### Olá, seja bem vindo(a)")
+    colum1.markdown(f"#### {nome} !")
 
 botao_dash = colum1.button("Dashboards Combustiveis")
 botao_ind = colum1.button("Analise de indicadores")
