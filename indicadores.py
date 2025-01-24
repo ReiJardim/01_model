@@ -69,6 +69,7 @@ indi(base_combustivel=base_gasolina, titulo=titulo_gasolina)
 titulo_disels10 = "Indicadores de disel S10"
 indi(base_combustivel=base_disels10, titulo=titulo_disels10)
 
+
 titulo_disel = "Indicadores de disel"
 indi(base_combustivel=base_disel, titulo=titulo_disel)
 
